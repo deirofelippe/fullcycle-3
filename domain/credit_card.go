@@ -6,8 +6,6 @@ import (
 	uuid "github.com/satori/go.uuid"
 )
 
-// uuid "github.com/satori/go.uuid"
-
 type CreditCard struct {
 	ID              string
 	Name            string
@@ -20,8 +18,8 @@ type CreditCard struct {
 	CreatedAt       time.Time
 }
 
-func NewCreditCard() CreditCard {
-	c := CreditCard{}
+func NewCreditCard() *CreditCard {
+	c := &CreditCard{}
 	c.ID = uuid.NewV1().String()
 	c.CreatedAt = time.Now()
 	return c
