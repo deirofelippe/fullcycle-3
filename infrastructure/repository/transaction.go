@@ -35,4 +35,27 @@ func (t *TransactionRepositoryDb) SaveTransaction(transaction domain.Transaction
 	if err != nil {
 		return err
 	}
+
+	if transaction.Status == "approved" {
+		err = t.updateBalance(creditCard)
+		if err != nil {
+			return err
+		}
+	}
+
+	err = stmt.Close()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (t *TransactionRepositoryDb) updateBalance(creditCard domain.CreditCard) error {
+	_, err := t.db.Exec("update credit_card set balance = $1 where id = $2", creditCard.Balance, creditCard.ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
