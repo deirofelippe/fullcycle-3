@@ -6,7 +6,7 @@ option go_package = "grpc/pb"; //configuracao especifica do go
 import "google/protobuf/empty.proto";
 
 //acao que as informacoes irao fazer. funcoes grpc q serao executadas de forma remota
-service PaymentRequest {
+service PaymentService {
    //funcoes q o servico vai executar
    rpc Payment(PaymentRequest) returns (google.protobuf.Empty) {}
 }
