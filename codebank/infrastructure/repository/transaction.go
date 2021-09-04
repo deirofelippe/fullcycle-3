@@ -67,7 +67,7 @@ func (t *TransactionRepositoryDb) SaveTransaction(transaction domain.Transaction
 }
 
 func (t *TransactionRepositoryDb) updateBalance(creditCard domain.CreditCard) error {
-	_, err := t.db.Exec("update credit_card set balance = $1 where id = $2", creditCard.Balance, creditCard.ID)
+	_, err := t.db.Exec("update credit_cards set balance = $1 where id = $2", creditCard.Balance, creditCard.ID)
 	if err != nil {
 		return err
 	}
