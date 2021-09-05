@@ -3,9 +3,11 @@ import { Product, products } from '../../../model'
 
 export default function handler(
    req: NextApiRequest,
-   res: NextApiResponse<Product>
+   res: NextApiResponse<Product | { message: string }>
 ) {
    const { slug } = req.query
    const product = products.find(p => p.slug === slug)
-   res.status(200).json(product!);
+   product
+      ? res.status(200).json(product)
+      : res.status(404).json({ message: "Product not found" })
 }

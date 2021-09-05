@@ -1,4 +1,5 @@
 import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from '@material-ui/core'
+import axios from 'axios'
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
@@ -47,13 +48,20 @@ export default ProductDetailPage;
 
 export const getStaticProps: GetStaticProps<ProductDetailPageProps, { slug: string }> = async context => {
    const { slug } = context.params!
-   const { data: product } = await http.get(`products/${slug}`)
+   try {
+      const { data: product } = await http.get(`products/${slug}`)
 
-   return {
-      props: {
-         product
-      },
-      revalidate: (1 * 60) * 2
+      return {
+         props: {
+            product
+         },
+         revalidate: (1 * 60) * 2
+      }
+   } catch (e) {
+      if (axios.isAxiosError(e) && e.response?.status === 404) {
+         return { notFound: true }
+      }
+      throw e
    }
 }
 
