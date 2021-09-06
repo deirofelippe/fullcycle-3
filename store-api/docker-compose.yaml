@@ -9,3 +9,24 @@ services:
       - 3000:3000
     volumes:
       - .:/home/node/app
+  
+  db:
+    build: .docker/postgres
+    container_name: imersao-fullcycle-3-store-api-db
+    restart: always
+    tty: true
+    volumes: 
+      - ./.docker/dbdata:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=store
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: imersao-fullcycle-3-store-api-pgadmin
+    tty: true
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=admin@user.com
+      - PGADMIN_DEFAULT_PASSWORD=123456
+    ports: 
+      - 9000:80
