@@ -25,3 +25,20 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/products/3256a19a-9135-46bd-b841-723a323e30b8
+
+###
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+   "credit_card":{
+      "number":"1234567890123456",
+      "name":"Felippe Deiró",
+      "expiration_month":9,
+      "expiration_year":2021,
+      "cvv":"123"
+   },
+   "items":[
+      {"quantity":2, "product_id":"34eca8f4-105f-4577-a652-2345ac5d0788"}
+   ]
+}
