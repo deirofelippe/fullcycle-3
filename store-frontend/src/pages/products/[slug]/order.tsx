@@ -5,13 +5,25 @@ import axios from 'axios'
 import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import http from '../../../http'
-import { Product } from '../../../model'
+import { CreditCard, Product } from '../../../model'
+import { useForm } from 'react-hook-form';
 
 interface OrderPageProps {
    product: Product
 }
 
 const OrderPage: NextPage<OrderPageProps> = ({ product }) => {
+   const { register, handleSubmit, setValue } = useForm()
+
+   const onSubmit = async (data: CreditCard) => {
+      const { data: order } = await http.post("orders", {
+         credit_card: data,
+         items: [{ product_id: product.id, quantity: 1 }]
+      })
+      
+      console.log(data);
+   }
+
    return (
       <div>
          <Head>
@@ -32,24 +44,40 @@ const OrderPage: NextPage<OrderPageProps> = ({ product }) => {
          <Typography component="h2" variant="h6" gutterBottom>
             Pague com cartão de crédito
          </Typography>
-         <form>
+         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={6}>
                <Grid item xs={12} md={6}>
-                  <TextField required label="Nome" fullWidth />
+                  <TextField {...register('name')} required label="Nome" fullWidth />
                </Grid>
                <Grid item xs={12} md={6}>
-                  <TextField required label="Número do cartão" fullWidth inputProps={{ maxLength: 16 }} />
+                  <TextField {...register('number')} required label="Número do cartão" fullWidth inputProps={{ maxLength: 16 }} />
                </Grid>
                <Grid item xs={12} md={6}>
-                  <TextField type="number" required label="CVV" fullWidth />
+                  <TextField {...register('cvv')} type="number" required label="CVV" fullWidth />
                </Grid>
                <Grid item xs={12} md={6}>
                   <Grid container spacing={3}>
                      <Grid item xs={6}>
-                        <TextField type="number" required label="Expiração mês" fullWidth />
+                        <TextField
+                           {...register('expiration_month')}
+                           onChange={e =>
+                              setValue("expiration_month", parseInt(e.target.value))
+                           }
+                           type="number"
+                           required
+                           label="Expiração mês"
+                           fullWidth />
                      </Grid>
                      <Grid item xs={6}>
-                        <TextField type="number" required label="Expiração ano" fullWidth />
+                        <TextField
+                           {...register('expiration_year')}
+                           onChange={e =>
+                              setValue("expiration_year", parseInt(e.target.value))
+                           }
+                           type="number"
+                           required
+                           label="Expiração ano"
+                           fullWidth />
                      </Grid>
                   </Grid>
                </Grid>
