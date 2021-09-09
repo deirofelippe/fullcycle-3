@@ -58,7 +58,7 @@ export class OrdersService {
          )
 
          queryRunner.commitTransaction()
-         return newOrder
+         return this.orderRepo.findOne(newOrder.id, { relations: ['items'] })
       } catch (error) {
          await queryRunner.rollbackTransaction()
          throw error
@@ -73,15 +73,17 @@ export class OrdersService {
       return orders
    }
 
-   findOne(id: number) {
-      return `This action returns a #${id} order`;
+   findOne(id: string) {
+      return this.orderRepo.findOneOrFail(id, {
+         relations: ['items', 'items.product']
+      });
    }
 
-   update(id: number, updateOrderDto: UpdateOrderDto) {
+   update(id: string, updateOrderDto: UpdateOrderDto) {
       return `This action updates a #${id} order`;
    }
 
-   remove(id: number) {
+   remove(id: string) {
       return `This action removes a #${id} order`;
    }
 }
