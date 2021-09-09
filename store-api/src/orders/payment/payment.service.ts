@@ -1,5 +1,5 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ClientGrpc } from '@nestjs/microservices';
+import { ClientGrpc, RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 
 interface PaymentData {
@@ -30,6 +30,13 @@ export class PaymentService implements OnModuleInit {
    }
 
    async payment(data: PaymentData) {
-      return await this.paymentGrpcService.payment(data);
+      try {
+         return await this.paymentGrpcService.payment(data);
+      } catch (error) {
+         throw new RpcException({
+            code: error.code,
+            message: error.message
+         })
+      }
    }
 }
