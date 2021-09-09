@@ -18,7 +18,7 @@ import { PaymentService } from './payment/payment.service';
             useFactory: () => ({
                transport: Transport.GRPC,
                options: {
-                  url: 'host.docker.internal:50052',
+                  url: process.env.GRPC_HOST,
                   package: 'payment',
                   protoPath: join(__dirname, 'proto/payment.proto')
                }
