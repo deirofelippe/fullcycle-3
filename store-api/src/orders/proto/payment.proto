@@ -1,0 +1,29 @@
+syntax = "proto3";
+package payment;
+//quando for gerada os stubs (arquivos q implementa a funcao), vai ser na pasta 'pb', 
+option go_package = "grpc/pb"; //configuracao especifica do go
+
+import "google/protobuf/empty.proto";
+
+//acao que as informacoes irao fazer. funcoes grpc q serao executadas de forma remota
+service PaymentService {
+   //funcoes q o servico vai executar
+   rpc Payment(PaymentRequest) returns (google.protobuf.Empty) {}
+}
+
+//informacoes
+message PaymentRequest {
+   message CreditCard {
+      // ordem em que os campos sao colocado
+      string name = 1;
+      string number = 2;
+      int32 expirationMonth = 3;
+      int32 expirationYear = 4;
+      int32 cvv = 5;
+   }
+
+   CreditCard creditCard = 1;
+   double amount = 2;
+   string store = 3;
+   string description = 4;
+}
