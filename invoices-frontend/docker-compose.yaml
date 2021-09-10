@@ -1,0 +1,13 @@
+version: "3"
+
+services: 
+  app:
+    build: .
+    entrypoint: ./.docker/entrypoint.sh
+    container_name: imersao-fullcycle-3-store-frontend-app
+    ports:
+      - 3003:3000
+    volumes:
+      - .:/home/node/app
+    extra_hosts: 
+      - 'host.docker.internal:host-gateway' #o endereco é o gateway do docker, a requisicao bate no gateway pra depois bater na nossa maquina. 
