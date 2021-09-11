@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CreditCardsService } from './credit-cards.service';
 import { CreateCreditCardDto } from './dto/create-credit-card.dto';
 
-@Controller('credit-card')
+@Controller('credit-cards')
 export class CreditCardController {
   constructor(private readonly creditCardService: CreditCardsService) {}
 
