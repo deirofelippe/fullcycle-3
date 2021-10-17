@@ -37,7 +37,7 @@ export class OrdersService {
 
       try {
          const newOrder = await queryRunner.manager.save(order)
-
+         
          await this.paymentService.payment({
             creditCard: {
                name: order.credit_card.name,
@@ -58,7 +58,9 @@ export class OrdersService {
          )
 
          queryRunner.commitTransaction()
-         return this.orderRepo.findOne(newOrder.id, { relations: ['items'] })
+         const o = await this.orderRepo.findOne(newOrder.id, { relations: ['items'] })
+         console.log(o, newOrder.id);
+         return o
       } catch (error) {
          await queryRunner.rollbackTransaction()
          throw error

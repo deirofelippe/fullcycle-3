@@ -8,10 +8,10 @@ POST http://localhost:3000/products
 Content-Type: application/json
 
 {
-   "name":"pc boladasso",
+   "name":"birubiru",
    "description":"Mussum Ipsum, cacilds",
    "image_url":"https://images.unsplash.com/photo-1545155277-5d5075713c86?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-   "price":5000.00
+   "price":50.00
 }
 
 ###
@@ -40,11 +40,11 @@ Content-Type: application/json
    "credit_card":{
       "number":"1111111111111103",
       "name":"Felippe",
-      "expiration_month":9,
-      "expiration_year":2029,
+      "expiration_month":12,
+      "expiration_year":2030,
       "cvv":"123"
    },
    "items":[
-      {"quantity":2, "product_id":"34eca8f4-105f-4577-a652-2345ac5d0788"}
+      {"quantity":1, "product_id":"388bfe28-4d53-40a9-b7de-e7d23c24aedb"}
    ]
 }

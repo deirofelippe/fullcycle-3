@@ -9,7 +9,6 @@ import { OrdersModule } from './orders/orders.module';
 @Module({
    imports: [
       ConfigModule.forRoot(),
-      ProductsModule,
       TypeOrmModule.forRoot({
          type: process.env.TYPEORM_CONNECTION as any,
          host: process.env.TYPEORM_HOST,
@@ -19,6 +18,7 @@ import { OrdersModule } from './orders/orders.module';
          database: process.env.TYPEORM_DATABASE,
          entities: [process.env.TYPEORM_ENTITIES],
       }),
+      ProductsModule,
       OrdersModule
    ],
    controllers: [AppController],

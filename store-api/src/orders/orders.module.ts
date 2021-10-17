@@ -12,8 +12,7 @@ import { PaymentService } from './payment/payment.service';
 @Module({
    imports: [
       TypeOrmModule.forFeature([Order, OrderItem, Product]),
-      ClientsModule.registerAsync([
-         {
+      ClientsModule.registerAsync([{
             name: 'PAYMENT_PACKAGE',
             useFactory: () => ({
                transport: Transport.GRPC,
