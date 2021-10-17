@@ -1,50 +1,13 @@
-GET http://localhost:3000/products
+GET http://localhost:3002/credit-cards
 
 ###
-GET http://localhost:3000/products/685518f9-565c-46a7-9a39-fc68320ce79a
-
-###
-POST http://localhost:3000/products
+POST http://localhost:3002/credit-cards
 Content-Type: application/json
 
 {
-   "name":"pc boladasso",
-   "description":"Mussum Ipsum, cacilds",
-   "image_url":"https://images.unsplash.com/photo-1545155277-5d5075713c86?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-   "price":5000.00
+   "name":"Felippe",
+   "number":"1111111111111105"
 }
 
 ###
-PATCH http://localhost:3000/products/685518f9-565c-46a7-9a39-fc68320ce79a
-Content-Type: application/json
-
-{
-   "name":"tv 321",
-   "price":1500.91
-}
-
-###
-DELETE http://localhost:3000/products/3256a19a-9135-46bd-b841-723a323e30b8
-
-###
-GET http://localhost:3000/orders
-
-###
-GET http://localhost:3000/orders/6c04f92c-484f-4f3d-bcb9-46e6a5cc229c
-
-###
-POST http://localhost:3000/orders
-Content-Type: application/json
-
-{
-   "credit_card":{
-      "number":"1111111111111103",
-      "name":"Felippe",
-      "expiration_month":9,
-      "expiration_year":2029,
-      "cvv":"123"
-   },
-   "items":[
-      {"quantity":2, "product_id":"34eca8f4-105f-4577-a652-2345ac5d0788"}
-   ]
-}
+GET http://localhost:3002/invoices

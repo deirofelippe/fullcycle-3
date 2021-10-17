@@ -31,7 +31,7 @@ export class NotExistsRule implements ValidatorConstraintInterface {
                [field]: value
             }
          })
-         if (!result) throw new Error(`${modelClass.name} already exists`)
+         if (result) throw new Error(`${modelClass.name} already exists`)
          return true
       } catch (error) {
          console.error(error);

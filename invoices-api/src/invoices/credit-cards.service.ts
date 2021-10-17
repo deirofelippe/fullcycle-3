@@ -9,8 +9,8 @@ export class CreditCardsService {
    constructor(
       @InjectRepository(CreditCard)
       private creditCardRepo: Repository<CreditCard>,
-   ){}
-   
+   ) { }
+
    create(createCreditCardDto: CreateCreditCardDto) {
       const creditCard = this.creditCardRepo.create(createCreditCardDto)
       return this.creditCardRepo.save(creditCard)
@@ -22,13 +22,5 @@ export class CreditCardsService {
 
    findOne(id: string) {
       return `This action returns a #${id} CreditCard`;
-   }
-
-   update(id: string, updateCreditCardDto) {
-      return `This action updates a #${id} CreditCard`;
-   }
-
-   remove(id: string) {
-      return `This action removes a #${id} CreditCard`;
    }
 }

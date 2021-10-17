@@ -1,15 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, ValidationPipe } from '@nestjs/common';
 import { InvoicesService } from './invoices.service';
-import { CreateInvoiceDto } from './dto/create-invoice.dto';
+import { KafkaCreateInvoiceDto } from './dto/create-invoice.dto';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 @Controller('invoices')
 export class InvoicesController {
    constructor(private readonly invoicesService: InvoicesService) { }
 
+   // create(@Payload() message: CreateInvoiceDto) {
+   //    return this.invoicesService.create(message);
    @MessagePattern('transactions')
-   create(@Payload() createInvoiceDto: CreateInvoiceDto) {
-      return this.invoicesService.create(createInvoiceDto);
+   create(@Payload(new ValidationPipe()) message: KafkaCreateInvoiceDto) {
+      return this.invoicesService.create(message.value);
    }
 
    @Get()

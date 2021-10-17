@@ -4,30 +4,20 @@ import { CreateCreditCardDto } from './dto/create-credit-card.dto';
 
 @Controller('credit-cards')
 export class CreditCardController {
-  constructor(private readonly creditCardService: CreditCardsService) {}
+   constructor(private readonly creditCardService: CreditCardsService) { }
 
-  @Post()
-  create(@Body() createCreditCardDto: CreateCreditCardDto) {
-    return this.creditCardService.create(createCreditCardDto);
-  }
+   @Post()
+   create(@Body() createCreditCardDto: CreateCreditCardDto) {
+      return this.creditCardService.create(createCreditCardDto);
+   }
 
-  @Get()
-  findAll() {
-    return this.creditCardService.findAll();
-  }
+   @Get()
+   findAll() {
+      return this.creditCardService.findAll();
+   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.creditCardService.findOne(id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCreditCardDto) {
-    return this.creditCardService.update(id, updateCreditCardDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.creditCardService.remove(id);
-  }
+   @Get(':id')
+   findOne(@Param('id') id: string) {
+      return this.creditCardService.findOne(id);
+   }
 }
