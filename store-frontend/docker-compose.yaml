@@ -10,4 +10,4 @@ services:
     volumes:
       - .:/home/node/app
     extra_hosts: 
-      - 'host.docker.internal:127.17.0.1' #o endereco é o gateway do docker, a requisicao bate no gateway pra depois bater na nossa maquina. 
+      - 'host.docker.internal:host-gateway' #o endereco é o gateway do docker, a requisicao bate no gateway pra depois bater na nossa maquina. 
