@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"time"
 
@@ -20,6 +21,7 @@ func NewUseCaseTransaction(transactionRepository domain.TransactionRepository) U
 }
 
 func (u UseCaseTransaction) ProcessTransaction(transactionDto dto.Transaction) (domain.Transaction, error) {
+	fmt.Println(transactionDto)
 	creditCard := u.hydrateCreditCard(transactionDto)
 	ccBalanceAndLimit, err := u.TransactionRepository.GetCreditCard(*creditCard)
 	if err != nil {
